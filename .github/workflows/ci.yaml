@@ -16,7 +16,9 @@
 name: Test Chart and Application
 
 on:
-  pull_request:
+  push:
+    branches:
+    - main
     # Only if there are changes to test.
     paths:
     - 'chart/**'
