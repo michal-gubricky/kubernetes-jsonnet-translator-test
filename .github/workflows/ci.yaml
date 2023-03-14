@@ -105,10 +105,6 @@ jobs:
     - name: Install yq
       run: |
         pip3 install yq
-        yq --version
-        which yq
-        ls ~/.local/bin/
-        ls ~/.local/bin/ | grep yq
 
     - name: Run End-to-End test
       run: |
@@ -123,8 +119,8 @@ jobs:
         diff /tmp/grafana-dashboard.json ci/grafana-dashboard.json
 
         timeout 30s bash -c 'until kubectl get prometheusrule prometheus-rules-generated &> /dev/null; do sleep 2; done' || (echo "Failed: prometheusrule prometheus-rules-generated not found" >&2; false)
-        kubectl get prometheusrule prometheus-rules-generated -o yaml | ~/.local/bin/yq .spec > /tmp/prometheusrule-spec.json
-        ~/.local/bin/yq . ci/prometheusrule-spec.yaml > ci/prometheusrule-spec.json
+        kubectl get prometheusrule prometheus-rules-generated -o yaml | /opt/hostedtoolcache/ct/v3.4.0/x86_64/venv/bin/yq .spec > /tmp/prometheusrule-spec.json
+        /opt/hostedtoolcache/ct/v3.4.0/x86_64/venv/bin/yq . ci/prometheusrule-spec.yaml > ci/prometheusrule-spec.json
         diff /tmp/prometheusrule-spec.json ci/prometheusrule-spec.json
 
         kubectl create namespace test-namespace
