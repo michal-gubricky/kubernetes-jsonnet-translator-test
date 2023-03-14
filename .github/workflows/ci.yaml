@@ -107,6 +107,8 @@ jobs:
         pip3 install yq
         yq --version
         which yq
+        ls ~/.local/bin/
+        ls ~/.local/bin/ | grep yq
 
     - name: Run End-to-End test
       run: |
